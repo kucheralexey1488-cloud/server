@@ -1,0 +1,14 @@
+{
+  "name": "tactical-arena-server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@colyseus/schema": "^2.0.20",
+    "colyseus": "^0.15.17",
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  }
+}
