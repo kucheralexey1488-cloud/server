@@ -1,4 +1,5 @@
-import { Room } from 'colyseus';
+import pkg from 'colyseus';
+const { Room } = pkg;
 import { Schema, MapSchema, type } from '@colyseus/schema';
 
 // Схема игрока
