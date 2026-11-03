@@ -1,4 +1,5 @@
-import { Server } from 'colyseus';
+import pkg from 'colyseus';
+const { Server } = pkg;
 import { createServer } from 'http';
 import express from 'express';
 import cors from 'cors';
