@@ -21,7 +21,7 @@ type(Bot, {
   alive: 'boolean'
 });
 
-// Схема комнаты (всё, что синхронизируется с клиентами)
+// Схема комнаты
 export class RoomState extends Schema {}
 type(RoomState, {
   players: { map: Player },
@@ -34,7 +34,12 @@ export class ArenaRoom extends Room {
 
   onCreate() {
     this.setState(new RoomState());
+    
+    // Инициализируем пустые карты (это исправит ошибку)
+    this.state.players = new MapSchema();
+    this.state.bots = new MapSchema();
     this.state.round = 1;
+    
     this.spawnBot();
     
     // Игровой цикл сервера (20 тиков в секунду)
@@ -53,7 +58,13 @@ export class ArenaRoom extends Room {
 
   onJoin(client) {
     console.log(client.sessionId, 'joined!');
-    this.state.players.set(client.sessionId, new Player());
+    // Создаём игрока и задаём ему стартовые координаты
+    const p = new Player();
+    p.x = 0;
+    p.z = 20;
+    p.yaw = 0;
+    p.hp = 100;
+    this.state.players.set(client.sessionId, p);
   }
 
   onLeave(client) {
